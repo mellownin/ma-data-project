@@ -5,15 +5,18 @@ const app = express();
 const port = 3000;
 
 // Connect to MongoDB
-mongoose.connect('mongodb://mongo:27017/mydatabase',{ useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://mongo:27017/mydatabase', { useNewUrlParser: true, useUnifiedTopology: true });
 
-// Serve static files from the Angular app
-app.use(express.static(path.join(__dirname, 'client/dist/client')));
+// Middleware to handle JSON requests
+app.use(express.json());
 
 // API routes
 app.get('/api', (req, res) => {
     res.send('API Works!');
 });
+
+// Serve static files from the Angular app
+app.use(express.static(path.join(__dirname, 'client/dist/client')));
 
 // All other routes should serve the Angular app
 app.get('*', (req, res) => {
@@ -21,5 +24,5 @@ app.get('*', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server is running on https://localhost:${port}`)
+    console.log(`Server is running on http://localhost:${port}`);
 });

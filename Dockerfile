@@ -24,7 +24,7 @@ RUN npm install
 
 # Expose the port the app runs on
 EXPOSE 4200
+EXPOSE 3000
 
-# Command to run the Angular development server
-CMD ["ng", "serve", "--host", "0.0.0.0"]
-
+# Command to run the Angular development server and Node.js server
+CMD ["sh", "-c", "cd /app && node server.js & cd /app/client && ng serve --host 0.0.0.0"]

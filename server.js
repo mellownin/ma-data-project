@@ -5,7 +5,7 @@ const app = express();
 const port = 3000;
 
 // Connect to MongoDB
-mongoose.connect('mongodb://mongo:27017/mydatabase', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://mongo:27017/mydatabase');
 
 // Middleware to handle JSON requests
 app.use(express.json());

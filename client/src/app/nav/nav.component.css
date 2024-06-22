@@ -1,3 +1,17 @@
-p {
-    color: #a2e8dd;
+div.NavBar {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    padding: 20px;
+    gap: 30px;
+}
+
+button.NavButton {
+    background: #a2e8dd;
+    color: #0f7173;
+}
+
+button.NavButton:hover {
+    background: #bcb6ff;
+    color: #976391;
 }

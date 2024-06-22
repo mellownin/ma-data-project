@@ -1,0 +1,25 @@
+.header-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    border: lightgray 2px solid;
+    border-radius: 4px;
+    margin: 20px 60px;
+    padding: 10px;
+    column-gap: 5px;
+
+}
+
+#home-header {
+    display: flex;
+    color: #bcb6ff;
+    margin: 0px 20px;
+}
+
+#home-info {
+    display: flex;
+    color: #bcb6ff;
+    margin: 0px 20px;
+    font-size: 18px;
+}

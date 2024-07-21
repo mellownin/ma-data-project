@@ -1,11 +1,31 @@
-const axios = require('axios'); // Makes HTTP requests to webpage
-const cheerio = require('cheerio'); // For parsing and navigating the HTML of the webpage
-const fs = require('fs'); // For file system operations like reading and writing files
-const path = require('path'); // For handling file and directory paths
-const unzipper = requrie('unzipper'); // For extracting zip files
-const { MongoClient } = require('mongodb'); // for connecting to MongoDB and performing database operations
+const axios = require('axios');
+const cheerio = require('cheerio');
 
-const MONGO_URI = 'mongodb://mongo:27017';
-const DATABASE_NAME = 'cmsMaPublicDb';
-const COLLECTION_NAME = ''
+const CMS_ENROLL_PARENT_URL = 'https://www.cms.gov/data-research/statistics-trends-and-reports/medicare-advantagepart-d-contract-and-enrollment-data/monthly-enrollment-contract/plan/state/county';
+const BASE_ENROLL_URL = 'https://www.cms.gov';
+
+async function getMonthlyLinks() {
+    const response = await axios.get(CMS_ENROLL_PARENT_URL);
+    const $ = cheerio.load(response.data);
+    const links = [];
+
+    $('table tr').each((index, element) => {
+        let monthLink = $(element).find('td').eq(0).find('a').attr('href');
+        if (monthLink) {
+            // add link prefix...
+            monthLink = BASE_ENROLL_URL + monthLink;
+            links.push(monthLink);
+        }
+    });
+
+    return links;
+
+}
+
+async function main() {
+    const links = await getMonthlyLinks();
+    console.log('Monthly links:', links);
+}
+
+main().catch(console.error);
 

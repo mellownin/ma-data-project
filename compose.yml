@@ -7,6 +7,9 @@ services:
       - .:/app
     depends_on:
       - mongo
+    deploy:
+      limits:
+        memory: 46
     
   client:
     build: .

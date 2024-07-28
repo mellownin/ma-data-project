@@ -15,14 +15,14 @@ async function getMonthlyLinks() {
         const dataPeriodRaw = $(element).find('td').eq(1).text().trim(); // Get raw data period of monthly link
         const dataPeriodMatch = dataPeriodRaw.match(/(\d{4}-\d{2})/); // Extract the YYYY-MM part using regex
         const dataPeriod = dataPeriodMatch ? dataPeriodMatch[0] : null;
-        console.log(`Raw dataPeriod: "${dataPeriodRaw}", Extracted dataPeriod: "${dataPeriod}"`); // Debugging: Log raw and extracted dataPeriod
+        //console.log(`Raw dataPeriod: "${dataPeriodRaw}", Extracted dataPeriod: "${dataPeriod}"`); // Debugging: Log raw and extracted dataPeriod
 
         if (dataPeriod) {
             const [yearStr, monthStr] = dataPeriod.split('-'); // Split the data period into year and month strings
             const year = parseInt(yearStr, 10);
             const month = parseInt(monthStr, 10);
 
-            console.log(`Extracted year: ${year}, month: ${month}`); // Debugging: Log year and month
+            //console.log(`Extracted year: ${year}, month: ${month}`); // Debugging: Log year and month
 
             if (!isNaN(year) && year >= MIN_YEAR) {
                 let monthLink = $(element).find('td').eq(0).find('a').attr('href');
@@ -38,10 +38,26 @@ async function getMonthlyLinks() {
     return links;
 }
 
+// Function to Get the Download Link from the Monthly Page
+async function getDownloadLink(monthly) {
+    const response = await axios.get(monthly.url);
+    const $ = cheerio.load(response.data);
+    const downloadLink = $('a[href$=".zip"]').attr('href'); // Adjust the selector based on actual HTML structure
+    return BASE_ENROLL_URL + downloadLink;
+}
+
 // Main Function to Orchestrate the Process
 async function main() {
     const links = await getMonthlyLinks();
-    console.log('Monthly links:', links);
+    const downloadLinks = [];
+
+    for (const monthly of links) {
+        const downloadLink = await getDownloadLink(monthly);
+        downloadLinks.push({ downloadLink, year: monthly.year, month: monthly.month });
+    }
+
+    console.log('Download links with periods:', downloadLinks);
 }
 
 main().catch(console.error);
+

@@ -8,8 +8,9 @@ services:
     depends_on:
       - mongo
     deploy:
-      limits:
-        memory: 46
+      resources:
+        limits:
+          memory: 46
     
   client:
     build: .

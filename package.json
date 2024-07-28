@@ -12,7 +12,10 @@
   "dependencies": {
     "axios": "^1.7.2",
     "cheerio": "^1.0.0-rc.12",
+    "csv": "^6.3.10",
+    "csv-parser": "^3.0.0",
     "express": "^4.19.2",
-    "mongoose": "^8.4.1"
+    "mongoose": "^8.4.1",
+    "unzipper": "^0.12.2"
   }
 }

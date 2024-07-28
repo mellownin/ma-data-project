@@ -7,11 +7,8 @@ services:
       - .:/app
     depends_on:
       - mongo
-    deploy:
-      resources:
-        limits:
-          memory: 46
-    
+    mem_limit: 4g
+  
   client:
     build: .
     ports:
@@ -22,13 +19,15 @@ services:
     command: ["ng", "serve", "--host", "0.0.0.0"]
     depends_on:
       - app
+    mem_limit: 4g
   
   mongo:
     image: mongo:latest
-    ports: 
+    ports:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
-  
+    mem_limit: 4g
+
 volumes:
   mongo-data:

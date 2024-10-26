@@ -4,8 +4,9 @@ FROM node:lts-alpine3.20
 # Set the working directory
 WORKDIR /client
 
-# Copy package.json and package-lock.json to the working directory
+# Copy package.json, package-lock.json, and angular.json to the working directory
 COPY package*.json ./
+COPY angular.json ./
 
 # Install dependencies
 RUN npm install

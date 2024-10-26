@@ -1,4 +1,4 @@
-# Gather the official node.js image based on Apline Linux
+# Gather the official node.js image based on Alpine Linux
 FROM node:lts-alpine3.20
 
 # Set the working directory
@@ -10,8 +10,8 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
-# Copy the rest of the application code
-COPY . .
+# Copy the 'src' folder from client/src
+COPY ./src ./src  
 
 # Expose the port the app runs on
 EXPOSE 4200

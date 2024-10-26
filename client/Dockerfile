@@ -2,7 +2,7 @@
 FROM node:lts-alpine3.20
 
 # Set the working directory
-WORKDIR /client
+WORKDIR /app
 
 # Copy package.json, package-lock.json, and angular.json to the working directory
 COPY package*.json ./
@@ -17,5 +17,5 @@ COPY ./src ./src
 # Expose the port the app runs on
 EXPOSE 4200
 
-# Command to run the Angular development server (may need to add ngx to the pos 0 in the array)
+# Command to run the Angular development server
 CMD ["ng", "serve", "--host", "0.0.0.0"]

@@ -2,11 +2,7 @@
 FROM node:lts-alpine3.20
 
 # Set the working directory
-WORKDIR /app
-
-# Copy package.json, package-lock.json, and angular.json to the working directory
-COPY package*.json ./
-COPY angular.json ./
+WORKDIR /client
 
 # Install dependencies
 RUN npm install
@@ -18,4 +14,4 @@ COPY ./src ./src
 EXPOSE 4200
 
 # Command to run the Angular development server
-CMD ["npx", "ng", "serve", "--host", "0.0.0.0"]
+CMD ["ng", "serve", "--host", "0.0.0.0"]

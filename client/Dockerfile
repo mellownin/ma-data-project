@@ -17,4 +17,4 @@ COPY ./src ./src
 EXPOSE 4200
 
 # Command to run the Angular development server (may need to add ngx to the pos 0 in the array)
-CMD ["ng", "serve", "--host", "0.0.0.0"]
+CMD ["ngx","ng", "serve", "--host", "0.0.0.0"]

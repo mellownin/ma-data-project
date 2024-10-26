@@ -1,14 +1,15 @@
 # Gather the official node.js image based on Alpine Linux
 FROM node:lts-alpine3.20
 
-# Set the working directory
+# Set the working directory to /client
 WORKDIR /client
+
+# Copy package.json, package-lock.json, and angular.json to the working directory
+COPY *.json ./
+COPY ./src ./src
 
 # Install dependencies
 RUN npm install
-
-# Copy the 'src' folder from client/src
-COPY ./src ./src  
 
 # Expose the port the app runs on
 EXPOSE 4200

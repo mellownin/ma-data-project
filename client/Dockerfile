@@ -1,18 +1,24 @@
 # Gather the official node.js image based on Alpine Linux
 FROM node:lts-alpine3.20
 
-# Set the working directory to /client
-WORKDIR /client
+# Set the working directory
+WORKDIR /app
 
-# Copy all .json files to the working directory
-COPY *.json ./
-COPY ./src ./src
+#Install Angular CLI globally first
+RUN npm install -g @angular/cli
+
+# Copy package files first for better caching
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
-# Expose the port the app runs on
+# Copy the rest of the application
+COPY . .
+
+# Expose port
 EXPOSE 4200
 
-# Command to run the Angular development server
-CMD ["ng", "serve", "--host", "0.0.0.0"]
+# Use npm start instead of direct ng server
+CMD ["npm","start"]
+
